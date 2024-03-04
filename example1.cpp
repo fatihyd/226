@@ -48,24 +48,33 @@ nodeType* buildListForward() {
 }
 
 nodeType* buildListBackward() {
-    // last is NOT necessary since
+    /*
+     * 'last' is not necessary
+     * since new nodes are linked
+     * to 'first' in reverse
+     */
     nodeType* first;
     nodeType* newNode;
     int num;
-    cout << "Enter a list of integers ending with -999."
-         << endl;
+
+    cout << "Enter a list of integers ending with -999." << endl;
     cin >> num;
-    first = NULL;
+    first = NULL; // ???
+
     while (num != -999) {
-        newNode = new nodeType; //create a node
-        newNode->info = num; //store the data in newNode
-        newNode->link = first; //put newNode at the beginning of the list
-        first = newNode; //update the head pointer of
-//the list, that is, first
-        cin >> num; //read the next number
+        newNode = new nodeType;
+        newNode->info = num;
+        /*
+         * the 'link' field of the new node is set to the current first node of the list
+         * this effectively inserts the new node at the beginning of the list
+         */
+        newNode->link = first;
+        // update 'first' to point to the new node, which is the new first node of the list
+        first = newNode;
+        cin >> num;
     }
     return first;
-} //end buildListBackward
+}
 
 void print(nodeType *current) {
     cout << " Printing linked list: ";
